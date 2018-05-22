@@ -15,6 +15,7 @@
 		D199C2CB20B491FD0090D0C3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D199C2C920B491FD0090D0C3 /* LaunchScreen.storyboard */; };
 		D199C2D620B491FD0090D0C3 /* DateNightTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D199C2D520B491FD0090D0C3 /* DateNightTests.swift */; };
 		D199C2E120B491FE0090D0C3 /* DateNightUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D199C2E020B491FE0090D0C3 /* DateNightUITests.swift */; };
+		D199C2F020B4928B0090D0C3 /* Places.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D199C2EE20B4928B0090D0C3 /* Places.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		D199C2DC20B491FE0090D0C3 /* DateNightUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DateNightUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D199C2E020B491FE0090D0C3 /* DateNightUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateNightUITests.swift; sourceTree = "<group>"; };
 		D199C2E220B491FE0090D0C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D199C2EF20B4928B0090D0C3 /* Places.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Places.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				D199C2C720B491FD0090D0C3 /* Assets.xcassets */,
 				D199C2C920B491FD0090D0C3 /* LaunchScreen.storyboard */,
 				D199C2CC20B491FD0090D0C3 /* Info.plist */,
+				D199C2EE20B4928B0090D0C3 /* Places.xcdatamodeld */,
 			);
 			path = DateNight;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 				D199C2C320B491FC0090D0C3 /* SecondViewController.swift in Sources */,
 				D199C2BF20B491FC0090D0C3 /* AppDelegate.swift in Sources */,
 				D199C2C120B491FC0090D0C3 /* FirstViewController.swift in Sources */,
+				D199C2F020B4928B0090D0C3 /* Places.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,6 +441,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 96ARV772TN;
 				INFOPLIST_FILE = DateNight/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -455,6 +460,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 96ARV772TN;
 				INFOPLIST_FILE = DateNight/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -588,6 +594,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		D199C2EE20B4928B0090D0C3 /* Places.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D199C2EF20B4928B0090D0C3 /* Places.xcdatamodel */,
+			);
+			currentVersion = D199C2EF20B4928B0090D0C3 /* Places.xcdatamodel */;
+			path = Places.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = D199C2B320B491FC0090D0C3 /* Project object */;
 }
