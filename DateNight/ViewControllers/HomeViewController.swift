@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  HomeViewController.swift
 //  DateNight
 //
 //  Created by Brandon Barooah on 5/22/18.
@@ -7,19 +7,22 @@
 //
 
 import UIKit
+import CoreData
 
-class FirstViewController: UIViewController {
+class HomeViewController: UIViewController {
 
+    var managedContext: NSManagedObjectContext?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
 
 }
-

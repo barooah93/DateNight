@@ -1,5 +1,5 @@
 //
-//  SecondViewController.swift
+//  FirstViewController.swift
 //  DateNight
 //
 //  Created by Brandon Barooah on 5/22/18.
@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import CoreData
 
-class SecondViewController: UIViewController {
+class HomeViewController: UIViewController {
+    
+    var managedContext: NSManagedObjectContext?
 
     override func viewDidLoad() {
         super.viewDidLoad()
