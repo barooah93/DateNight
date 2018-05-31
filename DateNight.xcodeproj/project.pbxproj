@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D182889820B4A36A008CE48A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D182889720B4A36A008CE48A /* HomeViewController.swift */; };
+		D182889820B4A36A008CE48A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D182889720B4A36A008CE48A /* SearchViewController.swift */; };
+		D182889C20BF612A008CE48A /* LocationUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D182889B20BF612A008CE48A /* LocationUtilities.swift */; };
+		D182889E20BF6149008CE48A /* IOSUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D182889D20BF6149008CE48A /* IOSUtilities.swift */; };
+		D18288A120BF67EA008CE48A /* SearchPlacesTableSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18288A020BF67EA008CE48A /* SearchPlacesTableSource.swift */; };
+		D18288A320BF709B008CE48A /* SearchMapDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18288A220BF709B008CE48A /* SearchMapDelegate.swift */; };
 		D199C2BF20B491FC0090D0C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D199C2BE20B491FC0090D0C3 /* AppDelegate.swift */; };
 		D199C2C320B491FC0090D0C3 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D199C2C220B491FC0090D0C3 /* HistoryViewController.swift */; };
 		D199C2C620B491FC0090D0C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D199C2C420B491FC0090D0C3 /* Main.storyboard */; };
@@ -37,7 +41,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D182889720B4A36A008CE48A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		D182889720B4A36A008CE48A /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		D182889B20BF612A008CE48A /* LocationUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationUtilities.swift; sourceTree = "<group>"; };
+		D182889D20BF6149008CE48A /* IOSUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSUtilities.swift; sourceTree = "<group>"; };
+		D18288A020BF67EA008CE48A /* SearchPlacesTableSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPlacesTableSource.swift; sourceTree = "<group>"; };
+		D18288A220BF709B008CE48A /* SearchMapDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMapDelegate.swift; sourceTree = "<group>"; };
 		D199C2BB20B491FC0090D0C3 /* DateNight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DateNight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D199C2BE20B491FC0090D0C3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D199C2C220B491FC0090D0C3 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
@@ -80,6 +88,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D182889920B4A511008CE48A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		D182889A20BF6105008CE48A /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				D182889B20BF612A008CE48A /* LocationUtilities.swift */,
+				D182889D20BF6149008CE48A /* IOSUtilities.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		D18288A420BF70A9008CE48A /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				D199C2F120B4952E0090D0C3 /* Search */,
+				D18288A520BF70C2008CE48A /* History */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		D18288A520BF70C2008CE48A /* History */ = {
+			isa = PBXGroup;
+			children = (
+				D199C2C220B491FC0090D0C3 /* HistoryViewController.swift */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
 		D199C2B220B491FC0090D0C3 = {
 			isa = PBXGroup;
 			children = (
@@ -104,9 +145,11 @@
 			isa = PBXGroup;
 			children = (
 				D199C2F420B496390090D0C3 /* CoreData */,
+				D182889A20BF6105008CE48A /* Utilities */,
+				D182889920B4A511008CE48A /* Services */,
 				D199C2F320B495C90090D0C3 /* Constants */,
 				D199C2F220B495BB0090D0C3 /* Models */,
-				D199C2F120B4952E0090D0C3 /* ViewControllers */,
+				D18288A420BF70A9008CE48A /* Features */,
 				D199C2BE20B491FC0090D0C3 /* AppDelegate.swift */,
 				D199C2C420B491FC0090D0C3 /* Main.storyboard */,
 				D199C2C720B491FD0090D0C3 /* Assets.xcassets */,
@@ -134,13 +177,14 @@
 			path = DateNightUITests;
 			sourceTree = "<group>";
 		};
-		D199C2F120B4952E0090D0C3 /* ViewControllers */ = {
+		D199C2F120B4952E0090D0C3 /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				D182889720B4A36A008CE48A /* HomeViewController.swift */,
-				D199C2C220B491FC0090D0C3 /* HistoryViewController.swift */,
+				D18288A020BF67EA008CE48A /* SearchPlacesTableSource.swift */,
+				D18288A220BF709B008CE48A /* SearchMapDelegate.swift */,
+				D182889720B4A36A008CE48A /* SearchViewController.swift */,
 			);
-			path = ViewControllers;
+			path = Search;
 			sourceTree = "<group>";
 		};
 		D199C2F220B495BB0090D0C3 /* Models */ = {
@@ -297,11 +341,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D182889820B4A36A008CE48A /* HomeViewController.swift in Sources */,
+				D182889820B4A36A008CE48A /* SearchViewController.swift in Sources */,
+				D182889E20BF6149008CE48A /* IOSUtilities.swift in Sources */,
 				D199C2F620B496720090D0C3 /* CoreDataStack.swift in Sources */,
 				D199C2C320B491FC0090D0C3 /* HistoryViewController.swift in Sources */,
 				D199C2BF20B491FC0090D0C3 /* AppDelegate.swift in Sources */,
 				D199C2F020B4928B0090D0C3 /* Places.xcdatamodeld in Sources */,
+				D182889C20BF612A008CE48A /* LocationUtilities.swift in Sources */,
+				D18288A120BF67EA008CE48A /* SearchPlacesTableSource.swift in Sources */,
+				D18288A320BF709B008CE48A /* SearchMapDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

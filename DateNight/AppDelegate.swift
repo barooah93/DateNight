@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         guard let tabController = window?.rootViewController as? UITabBarController,
-            let viewController = tabController.viewControllers?.first as? HomeViewController else {
+            let viewController = tabController.viewControllers?.first as? SearchViewController else {
                 return true
         }
         
@@ -38,6 +38,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         coreDataStack.saveContext()
     }
 
+    // Returns the topmost viewcontroller on the stack
+    class func topViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+        if let nav = base as? UINavigationController {
+            return topViewController(base: nav.visibleViewController)
+        }
+        if let tab = base as? UITabBarController {
+            if let selected = tab.selectedViewController {
+                return topViewController(base: selected)
+            }
+        }
+        if let presented = base?.presentedViewController {
+            return topViewController(base: presented)
+        }
+        return base
+    }
 
 }
 
