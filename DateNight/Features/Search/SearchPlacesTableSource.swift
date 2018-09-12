@@ -9,7 +9,7 @@
 import UIKit
 
 protocol PlacesTableRowSelectedProtocol : class {
-    func didSelectRow(title : String, subtitle : String?)
+    func didSelectRow(title : String?, subtitle : String?)
 }
 
 class SearchPlacesTableSource: NSObject, UITableViewDelegate, UITableViewDataSource {
@@ -57,7 +57,7 @@ class SearchPlacesTableSource: NSObject, UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
-        rowSelectedProtocol?.didSelectRow(title: (cell!.textLabel!.text!), subtitle: (cell?.detailTextLabel?.text))
+        rowSelectedProtocol?.didSelectRow(title: (cell?.textLabel?.text), subtitle: (cell?.detailTextLabel?.text))
     }
     
     

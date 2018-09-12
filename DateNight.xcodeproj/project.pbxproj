@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D13521002148B0760048FF1F /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13520FF2148B0760048FF1F /* SearchViewModel.swift */; };
 		D182889820B4A36A008CE48A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D182889720B4A36A008CE48A /* SearchViewController.swift */; };
 		D182889C20BF612A008CE48A /* LocationUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D182889B20BF612A008CE48A /* LocationUtilities.swift */; };
 		D182889E20BF6149008CE48A /* IOSUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D182889D20BF6149008CE48A /* IOSUtilities.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D13520FF2148B0760048FF1F /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		D182889720B4A36A008CE48A /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		D182889B20BF612A008CE48A /* LocationUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationUtilities.swift; sourceTree = "<group>"; };
 		D182889D20BF6149008CE48A /* IOSUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSUtilities.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				D18288A020BF67EA008CE48A /* SearchPlacesTableSource.swift */,
 				D18288A220BF709B008CE48A /* SearchMapDelegate.swift */,
 				D182889720B4A36A008CE48A /* SearchViewController.swift */,
+				D13520FF2148B0760048FF1F /* SearchViewModel.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -347,6 +350,7 @@
 				D199C2C320B491FC0090D0C3 /* HistoryViewController.swift in Sources */,
 				D199C2BF20B491FC0090D0C3 /* AppDelegate.swift in Sources */,
 				D199C2F020B4928B0090D0C3 /* Places.xcdatamodeld in Sources */,
+				D13521002148B0760048FF1F /* SearchViewModel.swift in Sources */,
 				D182889C20BF612A008CE48A /* LocationUtilities.swift in Sources */,
 				D18288A120BF67EA008CE48A /* SearchPlacesTableSource.swift in Sources */,
 				D18288A320BF709B008CE48A /* SearchMapDelegate.swift in Sources */,

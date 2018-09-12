@@ -83,8 +83,7 @@ class LocationUtilities: NSObject, CLLocationManagerDelegate {
             {(action: UIAlertAction) in
                 IOSUtilities.openSettings()
                 self.locationSent = true
-        })
-        )
+        }))
         
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
