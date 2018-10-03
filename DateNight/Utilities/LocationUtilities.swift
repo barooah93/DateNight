@@ -38,9 +38,9 @@ class LocationUtilities: NSObject, CLLocationManagerDelegate {
         locationSent = false
         
         if(authorizationDetermined){
-            locationManager!.startUpdatingLocation()
+            locationManager?.startUpdatingLocation()
         } else {
-            locationManager!.requestWhenInUseAuthorization()
+            locationManager?.requestWhenInUseAuthorization()
         }
     }
     
@@ -59,13 +59,12 @@ class LocationUtilities: NSObject, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        if(locationManager!.location != nil){
-            locationManager!.stopUpdatingLocation()
-            if(!locationSent){
-                locationDelegate?.didReceiveLocation(location: locationManager!.location!)
-                locationSent = true
-            }
+        manager.stopUpdatingLocation()
+        if(!locationSent){
+            locationDelegate?.didReceiveLocation(location: locations.last!) // According to docs, locations always contains at least one entry
+            locationSent = true
         }
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

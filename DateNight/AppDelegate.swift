@@ -13,29 +13,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    lazy var coreDataStack = CoreDataStack(modelName: "Places")
+//    lazy var coreDataStack = CoreDataStack(modelName: "Places")
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        guard let tabController = window?.rootViewController as? UITabBarController,
-            let viewController = tabController.viewControllers?.first as? SearchViewController else {
-                return true
-        }
-        
-        viewController.managedContext = coreDataStack.managedContext
+//        guard let tabController = window?.rootViewController as? UITabBarController,
+//            let viewController = tabController.viewControllers?.first as? SearchViewController else {
+//                return true
+//        }
+//        
+//        viewController.managedContext = coreDataStack.managedContext
         
         return true
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
         
-        coreDataStack.saveContext()
+//        coreDataStack.saveContext()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        coreDataStack.saveContext()
+//        coreDataStack.saveContext()
     }
 
     // Returns the topmost viewcontroller on the stack

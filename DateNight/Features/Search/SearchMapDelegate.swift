@@ -24,18 +24,14 @@ class SearchMapDelegate: NSObject, MKMapViewDelegate {
             return nil
         }
         
-        let pinId = "customPin"
+        let pinId = Constants.placesAnnotationReuseId
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: pinId)
         
         if(annotationView == nil){
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: pinId)
 //            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: pinId)
             annotationView?.canShowCallout = true
-//            annotationView?.image = UIImage(named: "Map_Pin")
-//            let garbage = UIImageView(image: (UIImage(named: "Edit_Icon")))
-//            garbage.isUserInteractionEnabled = true
-//            annotationView?.rightCalloutAccessoryView = garbage
-            
+//            annotationView?.image = UIImage(named: "Map_Pin")            
         } else {
             annotationView?.annotation = annotation
         }

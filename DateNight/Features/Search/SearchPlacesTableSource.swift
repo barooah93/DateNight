@@ -14,8 +14,8 @@ protocol PlacesTableRowSelectedProtocol : class {
 
 class SearchPlacesTableSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     
-    var titlesList: [String]!
-    var subtitlesList: [String]!
+    var titlesList: [String]?
+    var subtitlesList: [String]?
     
     weak var rowSelectedProtocol : PlacesTableRowSelectedProtocol?
     
@@ -33,7 +33,7 @@ class SearchPlacesTableSource: NSObject, UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return titlesList.count
+        return titlesList?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -41,8 +41,8 @@ class SearchPlacesTableSource: NSObject, UITableViewDelegate, UITableViewDataSou
         if(cell == nil){
             cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "tableCell")
         }
-        cell?.textLabel?.text = titlesList[indexPath.row]
-        cell?.detailTextLabel?.text = subtitlesList[indexPath.row]
+        cell?.textLabel?.text = titlesList?[indexPath.row]
+        cell?.detailTextLabel?.text = subtitlesList?[indexPath.row]
         cell?.selectionStyle = UITableViewCellSelectionStyle.none
         return cell!
     }

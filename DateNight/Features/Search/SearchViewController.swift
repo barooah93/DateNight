@@ -16,44 +16,53 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var mapContainerView: UIView!
     @IBOutlet weak var searchTableView: UITableView!
     
-    var locationUtilities : LocationUtilities?
+    // View model
+    var searchViewModel = SearchViewModel()
     
-    var userLocation : CLLocation?
-    var mapRegion: MKCoordinateRegion?
-    var isRegionChanged = false
-    var isInitialLoad = true
-    
+    // Views
     var mapView : MKMapView?
     var mapDelegate: SearchMapDelegate?
     
-    var searchTableSource : SearchPlacesTableSource!
-    var searchCompleter: MKLocalSearchCompleter!
+    var searchTableSource : SearchPlacesTableSource?
+    var searchCompleter: MKLocalSearchCompleter?
     
-    var managedContext: NSManagedObjectContext?
+    // Properties
+    var isRegionChanged = false
+    var isInitialLoad = true
     
-    var savedPlaces : [Place]?
-    var places = [Place]()
+    var userLocation : CLLocation?
+    var mapRegion: MKCoordinateRegion?
+
+    var locationUtilities : LocationUtilities?
     
-    var defaultRadius : Int = 5 // Miles
-    var defaultRadiusMeters : Double = 0.0 // Will get calculated in ViewDidLoad
+    var defaultRadius : Double = 0.5 // Miles
     var milesToMetersMultiplier : Double = 1609.34
+    
+    var defaultRadiusMeters : Double {
+        get {
+            return milesToMetersMultiplier * defaultRadius
+        }
+    }
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.automaticallyAdjustsScrollViewInsets = false
+        
         // Set up location services
         locationUtilities = LocationUtilities(controller: self, delegate: self)
-
+        
         // Set up search bar and completer
         searchBar.delegate = self
         searchBar.returnKeyType = .done
         searchCompleter = MKLocalSearchCompleter()
-        searchCompleter.delegate = self
-        searchCompleter.filterType = MKSearchCompletionFilterType.locationsAndQueries
+        searchCompleter?.delegate = self
+        searchCompleter?.filterType = MKSearchCompletionFilterType.locationsAndQueries
         
         // Set up table view and source
         searchTableSource = SearchPlacesTableSource()
-        searchTableSource.rowSelectedProtocol = self
+        searchTableSource?.rowSelectedProtocol = self
         searchTableView.dataSource = searchTableSource
         searchTableView.delegate = searchTableSource
         searchTableView.isHidden = true
@@ -67,6 +76,7 @@ class SearchViewController: UIViewController {
         self.mapView?.showsUserLocation = true
         self.view.insertSubview(mapView!, aboveSubview: mapContainerView)
         self.view.bringSubview(toFront: searchTableView)
+        
         
     }
 
@@ -87,64 +97,48 @@ class SearchViewController: UIViewController {
     }
     
     // Makes an mklocalsearchrequest for nearby restaurants
-    func loadNearbyPlaces(region: MKCoordinateRegion) {
-        
-        // Make an mk search request with given region
-        let request = MKLocalSearchRequest()
-        request.region = region
-        request.naturalLanguageQuery = "restuarant"
-        
-        let localSearch = MKLocalSearch(request: request)
-        localSearch.start { (response, err) in
-            if let _ = err {
-                IOSUtilities.presentGenericAlertWithOK(self, title: "Error", message: "There was an issue finding eateries here")
-                return
-            }
-            
-            guard
-                let searchResponse = response,
-                let context = self.managedContext else {
-                    print("Either no response from mklocalsearch or no managed context")
-                    return
-            }
-            
-            // Loop through items and add annotations
-            for item in searchResponse.mapItems {
-                let place = Place(context: context)
-                place.latitude = item.placemark.coordinate.latitude
-                place.longitude = item.placemark.coordinate.longitude
-                place.name = item.placemark.name ?? ""
-                place.address = "\(item.placemark.subThoroughfare ?? "") \(item.placemark.thoroughfare ?? "") \(item.placemark.locality ?? "")"
-                self.places.append(place)
-            }
-            
+    func loadNearbyPlaces() {
+        guard let map = self.mapView else {
+            IOSUtilities.presentGenericAlertWithOK(self, title: "Error", message: "Map was set to nil")
+            return
         }
+        
+        self.presentLoadingOverlay(title: "Finding restaurants near you!")
+        self.searchViewModel.loadNearbyPlaces(with: map, success: {[weak self] in
+            self?.hideLoadingOverlay()
+        }, failure: {[weak self] err in
+            guard let wSelf = self else { return }
+            if let err = err {
+                print("\(err) \(err.localizedDescription)")
+            }
+            IOSUtilities.presentGenericAlertWithOK(wSelf, title: "Error", message: "There was an issue finding eateries here")
+        })
     }
     
     func clearTable(){
         // Hide table, clear results
         searchTableView.isHidden = true
-        searchTableSource.titlesList = []
-        searchTableSource.subtitlesList = []
+        searchTableSource?.titlesList = []
+        searchTableSource?.subtitlesList = []
         searchTableView.reloadData()
     }
 
 }
 
-// Core Location delegate
+// Location Utilities delegate
 extension SearchViewController: LocationDelegate {
     
     func didReceiveLocation(location : CLLocation){
         
         // Zoom map to user's location if they have not manipulated the map yet
         self.userLocation = location
-        self.mapRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 1000, 1000)
+        self.mapRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, defaultRadiusMeters, defaultRadiusMeters)
         self.mapView?.setRegion(self.mapRegion!, animated: true)
-        self.loadNearbyPlaces(region: self.mapRegion!)
+        self.loadNearbyPlaces()
     }
     
     func failedToReceiveLocation(err : Error){
-        print("FAILED: \(err.localizedDescription)")
+        print("ERROR: \(err.localizedDescription)")
     }
 }
 
@@ -159,8 +153,8 @@ extension SearchViewController: MKLocalSearchCompleterDelegate {
             titles.append(result.title)
             subtitles.append(result.subtitle)
         }
-        searchTableSource.titlesList = titles
-        searchTableSource.subtitlesList = subtitles
+        searchTableSource?.titlesList = titles
+        searchTableSource?.subtitlesList = subtitles
         searchTableView.reloadData()
     }
     
@@ -174,7 +168,7 @@ extension SearchViewController: UISearchBarDelegate {
             self.clearTable()
         }else{
             // Perform completer query
-            searchCompleter.queryFragment = searchText
+            searchCompleter?.queryFragment = searchText
             searchTableView.isHidden = false
         }
     }
@@ -225,6 +219,7 @@ extension SearchViewController: MKMapViewDelegate {
         return annotationView
     }
     
+    
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         // Load nearby restaurants
         if self.isInitialLoad {
@@ -233,7 +228,7 @@ extension SearchViewController: MKMapViewDelegate {
             self.isRegionChanged = true
         }
         
-        self.loadNearbyPlaces(region: mapView.region)
+        self.loadNearbyPlaces()
     }
 /*
     // Add gesture recognizer

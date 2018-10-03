@@ -25,7 +25,7 @@ class IOSUtilities: NSObject {
     static func openSettings(){
         if let settingsURL = URL(string: UIApplicationOpenSettingsURLString){
             if(UIApplication.shared.canOpenURL(settingsURL)){
-                UIApplication.shared.openURL(settingsURL)
+                UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
             }
         }
     }
