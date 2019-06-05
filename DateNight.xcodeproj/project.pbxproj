@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		D13521002148B0760048FF1F /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13520FF2148B0760048FF1F /* SearchViewModel.swift */; };
-		D1352102214A120F0048FF1F /* SearchResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1352101214A120F0048FF1F /* SearchResultModel.swift */; };
 		D1352104216455560048FF1F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1352103216455560048FF1F /* Extensions.swift */; };
 		D1352106216456FA0048FF1F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1352105216456FA0048FF1F /* Constants.swift */; };
 		D135210821645A010048FF1F /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D135210721645A010048FF1F /* CustomAnnotation.swift */; };
@@ -16,7 +15,6 @@
 		D182889C20BF612A008CE48A /* LocationUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D182889B20BF612A008CE48A /* LocationUtilities.swift */; };
 		D182889E20BF6149008CE48A /* IOSUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D182889D20BF6149008CE48A /* IOSUtilities.swift */; };
 		D18288A120BF67EA008CE48A /* SearchPlacesTableSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18288A020BF67EA008CE48A /* SearchPlacesTableSource.swift */; };
-		D18288A320BF709B008CE48A /* SearchMapDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18288A220BF709B008CE48A /* SearchMapDelegate.swift */; };
 		D199C2BF20B491FC0090D0C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D199C2BE20B491FC0090D0C3 /* AppDelegate.swift */; };
 		D199C2C320B491FC0090D0C3 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D199C2C220B491FC0090D0C3 /* HistoryViewController.swift */; };
 		D199C2C620B491FC0090D0C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D199C2C420B491FC0090D0C3 /* Main.storyboard */; };
@@ -47,7 +45,6 @@
 
 /* Begin PBXFileReference section */
 		D13520FF2148B0760048FF1F /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
-		D1352101214A120F0048FF1F /* SearchResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultModel.swift; sourceTree = "<group>"; };
 		D1352103216455560048FF1F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D1352105216456FA0048FF1F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D135210721645A010048FF1F /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
@@ -55,7 +52,6 @@
 		D182889B20BF612A008CE48A /* LocationUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationUtilities.swift; sourceTree = "<group>"; };
 		D182889D20BF6149008CE48A /* IOSUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSUtilities.swift; sourceTree = "<group>"; };
 		D18288A020BF67EA008CE48A /* SearchPlacesTableSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPlacesTableSource.swift; sourceTree = "<group>"; };
-		D18288A220BF709B008CE48A /* SearchMapDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMapDelegate.swift; sourceTree = "<group>"; };
 		D199C2BB20B491FC0090D0C3 /* DateNight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DateNight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D199C2BE20B491FC0090D0C3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D199C2C220B491FC0090D0C3 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
@@ -191,10 +187,8 @@
 			isa = PBXGroup;
 			children = (
 				D18288A020BF67EA008CE48A /* SearchPlacesTableSource.swift */,
-				D18288A220BF709B008CE48A /* SearchMapDelegate.swift */,
 				D182889720B4A36A008CE48A /* SearchViewController.swift */,
 				D13520FF2148B0760048FF1F /* SearchViewModel.swift */,
-				D1352101214A120F0048FF1F /* SearchResultModel.swift */,
 				D135210721645A010048FF1F /* CustomAnnotation.swift */,
 			);
 			path = Search;
@@ -342,7 +336,6 @@
 			files = (
 				D182889820B4A36A008CE48A /* SearchViewController.swift in Sources */,
 				D182889E20BF6149008CE48A /* IOSUtilities.swift in Sources */,
-				D1352102214A120F0048FF1F /* SearchResultModel.swift in Sources */,
 				D199C2F620B496720090D0C3 /* CoreDataStack.swift in Sources */,
 				D199C2C320B491FC0090D0C3 /* HistoryViewController.swift in Sources */,
 				D199C2BF20B491FC0090D0C3 /* AppDelegate.swift in Sources */,
@@ -352,7 +345,6 @@
 				D13521002148B0760048FF1F /* SearchViewModel.swift in Sources */,
 				D182889C20BF612A008CE48A /* LocationUtilities.swift in Sources */,
 				D18288A120BF67EA008CE48A /* SearchPlacesTableSource.swift in Sources */,
-				D18288A320BF709B008CE48A /* SearchMapDelegate.swift in Sources */,
 				D135210821645A010048FF1F /* CustomAnnotation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

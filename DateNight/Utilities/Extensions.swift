@@ -57,3 +57,14 @@ extension UIViewController {
         
     }
 }
+
+extension Place {
+    func isDuplicate(in places:[Place]) -> Bool {
+        for place in places {
+            if place.latitude == self.latitude && place.longitude == self.longitude {
+                return true
+            }
+        }
+        return false
+    }
+}

@@ -7,25 +7,28 @@
 //
 
 import UIKit
+import MapKit
 
 protocol PlacesTableRowSelectedProtocol : class {
-    func didSelectRow(title : String?, subtitle : String?)
+    func didSelectRow(result: MKLocalSearchCompletion)
 }
 
 class SearchPlacesTableSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     
-    var titlesList: [String]?
-    var subtitlesList: [String]?
+    weak var tableView: UITableView?
+    var results: [MKLocalSearchCompletion]? {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView?.reloadData()
+            }
+        }
+    }
     
     weak var rowSelectedProtocol : PlacesTableRowSelectedProtocol?
     
-    init(titles: [String], subtitles: [String]!){
-        self.titlesList = titles
-        self.subtitlesList = subtitles
-    }
-    
-    convenience override init(){
-        self.init(titles: [], subtitles: [])
+    init(tableView: UITableView, results: [MKLocalSearchCompletion] = []){
+        self.tableView = tableView
+        self.results = results
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -33,7 +36,7 @@ class SearchPlacesTableSource: NSObject, UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return titlesList?.count ?? 0
+        return results?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -41,8 +44,8 @@ class SearchPlacesTableSource: NSObject, UITableViewDelegate, UITableViewDataSou
         if(cell == nil){
             cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "tableCell")
         }
-        cell?.textLabel?.text = titlesList?[indexPath.row]
-        cell?.detailTextLabel?.text = subtitlesList?[indexPath.row]
+        cell?.textLabel?.text = results?[indexPath.row].title
+        cell?.detailTextLabel?.text = results?[indexPath.row].subtitle
         cell?.selectionStyle = UITableViewCellSelectionStyle.none
         return cell!
     }
@@ -56,8 +59,8 @@ class SearchPlacesTableSource: NSObject, UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath)
-        rowSelectedProtocol?.didSelectRow(title: (cell?.textLabel?.text), subtitle: (cell?.detailTextLabel?.text))
+        guard let result = results?[indexPath.row] else { return }
+        rowSelectedProtocol?.didSelectRow(result: result)
     }
     
     

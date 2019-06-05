@@ -21,7 +21,6 @@ class SearchViewController: UIViewController {
     
     // Views
     var mapView : MKMapView?
-    var mapDelegate: SearchMapDelegate?
     
     var searchTableSource : SearchPlacesTableSource?
     var searchCompleter: MKLocalSearchCompleter?
@@ -61,7 +60,7 @@ class SearchViewController: UIViewController {
         searchCompleter?.filterType = MKSearchCompletionFilterType.locationsAndQueries
         
         // Set up table view and source
-        searchTableSource = SearchPlacesTableSource()
+        searchTableSource = SearchPlacesTableSource(tableView: self.searchTableView)
         searchTableSource?.rowSelectedProtocol = self
         searchTableView.dataSource = searchTableSource
         searchTableView.delegate = searchTableSource
@@ -75,9 +74,7 @@ class SearchViewController: UIViewController {
         self.mapView?.delegate = self
         self.mapView?.showsUserLocation = true
         self.view.insertSubview(mapView!, aboveSubview: mapContainerView)
-        self.view.bringSubview(toFront: searchTableView)
-        
-        
+        self.view.bringSubview(toFront: searchTableView)        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -118,9 +115,7 @@ class SearchViewController: UIViewController {
     func clearTable(){
         // Hide table, clear results
         searchTableView.isHidden = true
-        searchTableSource?.titlesList = []
-        searchTableSource?.subtitlesList = []
-        searchTableView.reloadData()
+        searchTableSource?.results = []
     }
 
 }
@@ -146,16 +141,7 @@ extension SearchViewController: LocationDelegate {
 extension SearchViewController: MKLocalSearchCompleterDelegate {
     
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
-        
-        var titles = [String]()
-        var subtitles = [String]()
-        completer.results.forEach{ result in
-            titles.append(result.title)
-            subtitles.append(result.subtitle)
-        }
-        searchTableSource?.titlesList = titles
-        searchTableSource?.subtitlesList = subtitles
-        searchTableView.reloadData()
+        searchTableSource?.results = completer.results
     }
     
 }
@@ -186,8 +172,11 @@ extension SearchViewController: UISearchBarDelegate {
 
 // Search table row selected protocol
 extension SearchViewController: PlacesTableRowSelectedProtocol {
-    func didSelectRow(title: String?, subtitle: String?) {
-        // TODO:
+    func didSelectRow(result: MKLocalSearchCompletion) {
+        // Resign keyboard
+        self.searchBar.resignFirstResponder()
+        
+        // TODO: Make an mklocalsearchrequest with completion and display results on map
     }
 }
 
@@ -219,6 +208,10 @@ extension SearchViewController: MKMapViewDelegate {
         return annotationView
     }
     
+    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+        // Resign keyboard
+        self.searchBar.resignFirstResponder()
+    }
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         // Load nearby restaurants
@@ -230,7 +223,7 @@ extension SearchViewController: MKMapViewDelegate {
         
         self.loadNearbyPlaces()
     }
-/*
+
     // Add gesture recognizer
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.calloutSelected(_ :)))
@@ -242,13 +235,14 @@ extension SearchViewController: MKMapViewDelegate {
             view.removeGestureRecognizer(gesture)
         })
     }
+    
+    @objc
     func calloutSelected(_ sender: UITapGestureRecognizer){
         if let view = sender.view as? MKAnnotationView {
             if let annotation = view.annotation as? CustomAnnotation {
-                placesMapProtocol?.calloutWasSelected(coordinate: annotation.coordinate)
+                // TODO:
             }
         }
     }
- */
+ 
 }
-
